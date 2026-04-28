@@ -34,6 +34,6 @@ jobs:
             echo "No changes to filters.txt"
           else
             RULES=$(grep -c '' filters.txt || true)
-            git commit -m "Update filter list — ${RULES} rules"
+            git commit -m "chore(filters): auto-update filter list (${RULES} rules) [skip ci]"
             git push
           fi
