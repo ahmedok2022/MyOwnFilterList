@@ -203,21 +203,24 @@ echo ">> Processing rules..."
 # Merge, strip comments, deduplicate
 # ──────────────────────────────────────────────
 
-# Safely combine files — handle case where no include files exist
+# Safely combine files — ensure each file ends with a newline to prevent
+# last-line-of-file-N merging with first-line-of-file-N+1 (e.g. a rule
+# getting "[Adblock Plus 2.0]" or "! Title:" appended to it).
 {
     # Main downloaded lists (always exist if any download succeeded)
     for f in "$TEMP_DIR"/list_*.txt; do
-        [ -f "$f" ] && cat "$f"
+        [ -f "$f" ] && { cat "$f"; printf '\n'; }
     done
     # Included sub-files (may not exist)
     for f in "$INCLUDE_DIR"/inc_*.txt; do
-        [ -f "$f" ] && cat "$f"
+        [ -f "$f" ] && { cat "$f"; printf '\n'; }
     done
 } | grep -v '^\s*$' \
   | grep -v '^!' \
-  | grep -v '^\[Adblock' \
+  | grep -vE '\[Adblock' \
   | grep -vE '^[[:space:]]*#($|[^#@?])' \
   | grep -vE '^#+$' \
+  | grep -vE '<[a-zA-Z/][^>]*>' \
   | sed 's/^[[:space:]]*//' \
   | grep -v '^\s*$' \
   | grep -vE '[,$]app=[A-Za-z0-9._-]+\.' \
