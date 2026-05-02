@@ -223,8 +223,9 @@ echo ">> Processing rules..."
   | grep -vE '<[a-zA-Z/][^>]*>' \
   | sed 's/^[[:space:]]*//' \
   | grep -v '^\s*$' \
-  | grep -vE '[,$]app=[A-Za-z0-9._-]+\.' \
+  | grep -vE '[,$]app=' \
   | grep -vE '[,$]denyallow=' \
+  | grep -vE '\-abp-properties\(' \
   > "$TEMP_DIR/all_rules_raw.txt" || true
 
 # Bail out if no rules were collected
