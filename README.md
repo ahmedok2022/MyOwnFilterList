@@ -14,9 +14,27 @@ https://raw.githubusercontent.com/SamirPaulb/filter-lists/refs/heads/main/filter
 1. Dashboard → Filter lists → Import → paste the URL above
 2. Click "Apply changes"
 
-### Brave (Desktop & Mobile)
+**One-time fix to prevent YouTube anti-adblock detection:**
+
+uBlock Origin silently disables `trusted-*` scriptlets (the YouTube ad bypass mechanism) from external subscriptions by default. Fix it once:
+
+1. Dashboard → **Settings** → check **"I am an advanced user"** → click the **⚙ gear icon**
+2. Find `trustedListPrefixes` (default value: `ublock-`)
+3. Change it to:
+   ```
+   ublock- https://raw.githubusercontent.com/SamirPaulb/
+   ```
+4. Save
+
+This tells uBlock Origin to trust this list, enabling the `trusted-replace-fetch-response`, `trusted-prevent-dom-bypass`, and `trusted-rpnt` scriptlets that patch YouTube's ad detection at the JavaScript level. Without this step, YouTube can detect the adblocker and show a popup.
+
+### Brave Shields (Desktop & Mobile)
 1. `brave://adblock` → Custom filter lists → paste the URL above
-2. Brave auto-updates every few hours
+2. Brave auto-updates every few hours — no extra steps needed.
+
+### AdGuard
+1. Preferences → Filters → Custom → Add custom filter → paste the URL above
+2. No extra steps needed.
 
 ## What's Included
 
@@ -30,7 +48,7 @@ https://raw.githubusercontent.com/SamirPaulb/filter-lists/refs/heads/main/filter
 | Crypto Mining | NoCoin, uBO Resource Abuse |
 | Regional | Chinese, Russian, German, Korean, Indonesian, Indian, Arabic |
 | Security | Hagezi Fake, DoH/VPN/Proxy Bypass, IP Loggers, DandelionSprout Anti-Malware |
-| Brave-Specific | Brave Unbreak, Firstparty, Cookie, Social, YT Shorts/Distracting |
+| Brave-Specific | Brave Unbreak, Firstparty, Cookie, Social, YT Shorts |
 | Paywall Bypass | Antipaywall, BPC Paywall Filter |
 | Custom | Popup networks, streaming scriptlets, fingerprinting, notification spam |
 

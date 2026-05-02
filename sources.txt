@@ -92,7 +92,8 @@ https://raw.githubusercontent.com/brave/adblock-lists/master/brave-lists/brave-s
 https://raw.githubusercontent.com/brave/adblock-lists/master/brave-lists/brave-social.txt
 https://raw.githubusercontent.com/brave/adblock-lists/master/brave-lists/brave-cookie-specific.txt
 https://raw.githubusercontent.com/brave/adblock-lists/master/brave-lists/yt-shorts.txt
-https://raw.githubusercontent.com/brave/adblock-lists/master/brave-lists/yt-distracting.txt
+# DISABLED: hides YouTube recommendations below video (ytm-item-section-renderer.single-column-watch-next-modern-panels)
+# https://raw.githubusercontent.com/brave/adblock-lists/master/brave-lists/yt-distracting.txt
 
 # --- Paywall Bypass ---
 https://raw.githubusercontent.com/liamengland1/miscfilters/master/antipaywall.txt

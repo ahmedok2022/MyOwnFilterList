@@ -216,8 +216,10 @@ echo ">> Processing rules..."
 } | grep -v '^\s*$' \
   | grep -v '^!' \
   | grep -v '^\[Adblock' \
-  | grep -v '^# ' \
-  | grep -v '^#$' \
+  | grep -vE '^[[:space:]]*#($|[^#@?])' \
+  | grep -vE '^#+$' \
+  | sed 's/^[[:space:]]*//' \
+  | grep -v '^\s*$' \
   > "$TEMP_DIR/all_rules_raw.txt" || true
 
 # Bail out if no rules were collected
@@ -263,6 +265,24 @@ cat > "$OUTPUT" << HEADER
 !
 ! SETUP: Subscribe to this single URL in your browser:
 !   https://raw.githubusercontent.com/SamirPaulb/filter-lists/refs/heads/main/filters.txt
+!
+! ──────────────────────────────────────────────────────
+! uBlock Origin — one-time setup to fix YouTube ad detection:
+!
+!   This list includes uBlock's YouTube bypass rules (trusted-replace-fetch-response,
+!   trusted-prevent-dom-bypass, trusted-rpnt, etc.). uBlock Origin silently disables
+!   these "trusted-*" scriptlets from external subscriptions by default, which lets
+!   YouTube detect your adblocker. Fix it once:
+!
+!   1. Open uBlock Origin dashboard → Settings tab
+!   2. Check "I am an advanced user" → click the ⚙ gear icon
+!   3. Find: trustedListPrefixes
+!   4. Change: ublock-
+!      To:     ublock- https://raw.githubusercontent.com/SamirPaulb/
+!   5. Save — YouTube anti-adblock popup will never appear again.
+!
+!   Brave Shields / AdGuard: no extra steps needed.
+! ──────────────────────────────────────────────────────
 !
 ! ==============================
 ! SUBSCRIPTION RULES (merged from ${success} sources)
