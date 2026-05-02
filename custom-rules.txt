@@ -99,15 +99,40 @@ animepahe.*,kwik.*,gogoanime.*,gogoanimes.*,9anime.*##+js(aopr, PopAds)
 ||pushcrew.com^
 
 ! --- YouTube Anti-Adblock Bypass ---
-! uBlock Origin's trusted scriptlets (trusted-replace-fetch-response etc.) handle YouTube ad bypass.
-! Other filter lists in this merged set use traditional blocking on YouTube's ad infrastructure,
-! which YouTube's detection can see and triggers the anti-adblock popup.
-! These exceptions un-block YouTube's ad-verification endpoints so the scriptlet bypass works cleanly.
+! uBlock Origin handles YouTube via trusted scriptlets (trusted-replace-fetch-response,
+! trusted-prevent-dom-bypass, trusted-rpnt). These scriptlets patch YouTube's player response
+! so it never tries to serve ads — no detection is possible when done correctly.
+!
+! Problem: other filter lists in this merged set (EasyList, AdGuard, OISD, Hagezi, etc.)
+! use traditional blocking on YouTube's ad infrastructure. YouTube's detection sees
+! this traditional blocking even while the scriptlets are active, triggering the popup.
+!
+! Fix 1: $genericblock — disables generic (non-site-specific) blocking rules on YouTube pages.
+!   Prevents OISD/Hagezi/EasyList domain-blocking rules from firing on youtube.com.
+!   uBlock Origin's youtube.com-specific rules (with domain= option) are unaffected.
+@@||youtube.com^$genericblock
+@@||m.youtube.com^$genericblock
+!
+! Fix 2: $generichide — disables generic element hiding rules on YouTube pages.
+!   Prevents generic ##.ad-container type rules from mutating YouTube's DOM
+!   in ways that trigger YouTube's mutation-observer-based detection.
+@@||youtube.com^$generichide
+@@||m.youtube.com^$generichide
+!
+! Fix 3: Un-block YouTube's ad infrastructure domains from youtube.com pages.
+!   These are the domains YouTube checks to verify its ad system is operational.
+!   The scriptlet bypass makes YouTube never request ads — but if these are
+!   hard-blocked before the scriptlet runs, it breaks the bypass mechanism.
+@@||googleads.g.doubleclick.net^$domain=youtube.com,important
+@@||securepubads.g.doubleclick.net^$domain=youtube.com,important
+@@||pubads.g.doubleclick.net^$domain=youtube.com,important
+@@||static.doubleclick.net^$domain=youtube.com,important
+@@||pagead2.googlesyndication.com^$domain=youtube.com,important
+@@||imasdk.googleapis.com^$domain=youtube.com,important
+@@||s0.2mdn.net^$domain=youtube.com,important
+@@||googlevideo.com^$domain=youtube.com,important
 @@||www.youtube.com/api/stats/ads$xhr,domain=youtube.com,important
 @@||www.youtube.com/pcs/activeview$xhr,domain=youtube.com,important
-@@||pagead2.googlesyndication.com^$domain=youtube.com,important
-@@||googleads.g.doubleclick.net^$domain=youtube.com,important
-@@||static.doubleclick.net^$domain=youtube.com,important
 @@||www.youtube.com/pagead/^$domain=youtube.com,important
 @@||www.youtube.com/get_video_info$xhr,domain=youtube.com,important
 
