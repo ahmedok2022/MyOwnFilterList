@@ -98,6 +98,19 @@ animepahe.*,kwik.*,gogoanime.*,gogoanimes.*,9anime.*##+js(aopr, PopAds)
 ||webpushr.com^
 ||pushcrew.com^
 
+! --- YouTube Anti-Adblock Bypass ---
+! uBlock Origin's trusted scriptlets (trusted-replace-fetch-response etc.) handle YouTube ad bypass.
+! Other filter lists in this merged set use traditional blocking on YouTube's ad infrastructure,
+! which YouTube's detection can see and triggers the anti-adblock popup.
+! These exceptions un-block YouTube's ad-verification endpoints so the scriptlet bypass works cleanly.
+@@||www.youtube.com/api/stats/ads$xhr,domain=youtube.com,important
+@@||www.youtube.com/pcs/activeview$xhr,domain=youtube.com,important
+@@||pagead2.googlesyndication.com^$domain=youtube.com,important
+@@||googleads.g.doubleclick.net^$domain=youtube.com,important
+@@||static.doubleclick.net^$domain=youtube.com,important
+@@||www.youtube.com/pagead/^$domain=youtube.com,important
+@@||www.youtube.com/get_video_info$xhr,domain=youtube.com,important
+
 ! --- Fingerprinting ---
 ||cdn.fingerprint.com^
 ||fpjs.pro^
