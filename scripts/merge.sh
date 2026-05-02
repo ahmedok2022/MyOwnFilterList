@@ -230,8 +230,39 @@ fi
 
 echo "   Raw rules: $(wc -l < "$TEMP_DIR/all_rules_raw.txt" | tr -d ' ')"
 
+# ──────────────────────────────────────────────────────────────────────────────
+# YouTube conflict prevention
+# Strip youtube.com cosmetic + scriptlet rules from non-uBlock sources.
+# These rules trigger YouTube's DOM mutation detector even while uBlock's
+# trusted-replace-fetch-response bypass scriptlet is active.
+#
+# Pattern note: ## matches both element hiding (domain##.sel) AND scriptlet
+# rules (domain##+js(...)) because ##+js contains ##.
+# Exception rules (#@#) are NOT matched, so they pass through unaffected.
+#
+# We preserve any youtube.com trusted-* scriptlets (the actual bypass rules)
+# by extracting them first, stripping all ##-based youtube rules, then
+# re-adding only the trusted ones.
+# ──────────────────────────────────────────────────────────────────────────────
+
+# Step 1: Save trusted-* scriptlet rules for youtube.com (bypass — always keep)
+grep -E 'youtube\.com.*##[+]js[(]trusted-' "$TEMP_DIR/all_rules_raw.txt" \
+    > "$TEMP_DIR/youtube_trusted.txt" 2>/dev/null || true
+yt_trusted=$(wc -l < "$TEMP_DIR/youtube_trusted.txt" | tr -d ' ')
+echo "   YouTube bypass scriptlets preserved: $yt_trusted"
+
+# Step 2: Strip ALL youtube.com cosmetic + non-trusted-scriptlet rules
+grep -vE 'youtube\.com.*##' "$TEMP_DIR/all_rules_raw.txt" \
+    > "$TEMP_DIR/all_rules_no_yt_cosmetic.txt" 2>/dev/null || true
+stripped=$(( $(wc -l < "$TEMP_DIR/all_rules_raw.txt" | tr -d ' ') - $(wc -l < "$TEMP_DIR/all_rules_no_yt_cosmetic.txt" | tr -d ' ') ))
+echo "   YouTube cosmetic/scriptlet rules stripped: $stripped"
+
+# Step 3: Re-add only the trusted bypass scriptlets
+cat "$TEMP_DIR/all_rules_no_yt_cosmetic.txt" "$TEMP_DIR/youtube_trusted.txt" \
+    > "$TEMP_DIR/all_rules_clean.txt"
+
 # Deduplicate (sort -u)
-sort -u "$TEMP_DIR/all_rules_raw.txt" > "$TEMP_DIR/all_rules_dedup.txt"
+sort -u "$TEMP_DIR/all_rules_clean.txt" > "$TEMP_DIR/all_rules_dedup.txt"
 echo "   After dedup: $(wc -l < "$TEMP_DIR/all_rules_dedup.txt" | tr -d ' ')"
 
 # Extract custom rules (keep comments for section readability)

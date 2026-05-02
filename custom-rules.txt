@@ -99,30 +99,38 @@ animepahe.*,kwik.*,gogoanime.*,gogoanimes.*,9anime.*##+js(aopr, PopAds)
 ||pushcrew.com^
 
 ! --- YouTube Anti-Adblock Bypass ---
-! uBlock Origin handles YouTube via trusted scriptlets (trusted-replace-fetch-response,
-! trusted-prevent-dom-bypass, trusted-rpnt). These scriptlets patch YouTube's player response
-! so it never tries to serve ads — no detection is possible when done correctly.
+! uBlock Origin patches YouTube at the JS level via trusted scriptlets
+! (trusted-replace-fetch-response, trusted-prevent-dom-bypass, trusted-rpnt).
+! These scriptlets rewrite YouTube's player response so it never serves ads —
+! detection is impossible when the bypass runs cleanly.
 !
-! Problem: other filter lists in this merged set (EasyList, AdGuard, OISD, Hagezi, etc.)
-! use traditional blocking on YouTube's ad infrastructure. YouTube's detection sees
-! this traditional blocking even while the scriptlets are active, triggering the popup.
+! Without any intervention, EasyList / AdGuard / OISD / Hagezi sources each
+! contribute hundreds of youtube.com-specific cosmetic rules (youtube.com##.ad-*)
+! and non-trusted scriptlets. YouTube's DOM mutation observer detects those hidden
+! ad elements and triggers the "disable your adblocker" popup even while uBlock's
+! bypass is active.
 !
-! Fix 1: $genericblock — disables generic (non-site-specific) blocking rules on YouTube pages.
-!   Prevents OISD/Hagezi/EasyList domain-blocking rules from firing on youtube.com.
-!   uBlock Origin's youtube.com-specific rules (with domain= option) are unaffected.
+! Three-layer fix:
+!
+! Layer 1 (build-time, primary): scripts/merge.sh strips ALL youtube.com##
+!   cosmetic and non-trusted-scriptlet rules from merged sources before output.
+!   Only trusted-* bypass scriptlets (e.g. trusted-replace-fetch-response) are
+!   preserved. This removes the ~800+ conflicting rules at the source.
+!
+! Layer 2 (runtime): $genericblock + $generichide disable any remaining generic
+!   rules (rules without a youtube.com domain specifier) that would otherwise
+!   apply to youtube.com pages — e.g. generic ##.ad-container or OISD's plain
+!   ||doubleclick.net^ block.
 @@||youtube.com^$genericblock
 @@||m.youtube.com^$genericblock
-!
-! Fix 2: $generichide — disables generic element hiding rules on YouTube pages.
-!   Prevents generic ##.ad-container type rules from mutating YouTube's DOM
-!   in ways that trigger YouTube's mutation-observer-based detection.
 @@||youtube.com^$generichide
 @@||m.youtube.com^$generichide
 !
-! Fix 3: Un-block YouTube's ad infrastructure domains from youtube.com pages.
-!   These are the domains YouTube checks to verify its ad system is operational.
-!   The scriptlet bypass makes YouTube never request ads — but if these are
-!   hard-blocked before the scriptlet runs, it breaks the bypass mechanism.
+! Layer 3 (runtime): Explicitly un-block ad infrastructure domains on youtube.com.
+!   YouTube checks these domains to confirm its ad system is reachable. The bypass
+!   scriptlet makes YouTube never actually request ads, but if these domains are
+!   hard-blocked before the scriptlet runs, it can break the bypass mechanism.
+!   Using $important to override any other blocking rules.
 @@||googleads.g.doubleclick.net^$domain=youtube.com,important
 @@||securepubads.g.doubleclick.net^$domain=youtube.com,important
 @@||pubads.g.doubleclick.net^$domain=youtube.com,important
