@@ -34,22 +34,37 @@ echo "0" > "$TEMP_DIR/.counter"
 validate_filter_list() {
     local file="$1"
     local url="$2"
-    local lines
+    local lines size
     lines=$(wc -l < "$file" | tr -d ' ')
+    size=$(wc -c < "$file" | tr -d ' ')
 
-    # 1. Reject empty files (download failed silently)
-    if [ "$lines" -lt 2 ]; then
-        echo "   [SKIP] Empty file — $url"
+    # 1. Reject tiny files — real filter lists are at minimum several KB.
+    #    Anything under 500 bytes is an error page, rate-limit response, or redirect stub.
+    if [ "$size" -lt 500 ]; then
+        echo "   [SKIP] Too small (${size} bytes) — $url"
         return 1
     fi
 
-    # 2. Reject HTML error pages (proxy blocks, 404s, captchas, rate limits)
-    if head -10 "$file" | grep -qi '<!doctype\|<html'; then
-        echo "   [SKIP] HTML page (not a filter list) — $url"
+    # 2. Reject suspiciously short files (< 5 lines)
+    if [ "$lines" -lt 5 ]; then
+        echo "   [SKIP] Too few lines (${lines}) — $url"
         return 1
     fi
 
-    # 3. Reject binary/executable files
+    # 3. Reject HTML error pages: proxy blocks, 404s, captchas, Tomcat errors,
+    #    CloudFlare challenges, rate-limit pages.
+    if head -20 "$file" | grep -qi '<!doctype\|<html\|HTTP Status [0-9]\|<title>'; then
+        echo "   [SKIP] HTML/error page — $url"
+        return 1
+    fi
+
+    # 4. Reject JSON error responses (API auth errors, rate limits returning JSON)
+    if head -3 "$file" | grep -qE '^[[:space:]]*\{'; then
+        echo "   [SKIP] JSON response (not a filter list) — $url"
+        return 1
+    fi
+
+    # 5. Reject binary/executable files
     if file -b --mime "$file" 2>/dev/null | grep -q 'binary\|octet-stream\|executable'; then
         echo "   [SKIP] Binary content — $url"
         return 1
@@ -110,16 +125,20 @@ resolve_includes() {
         echo "$fc" > "$TEMP_DIR/.counter"
         local include_file="$INCLUDE_DIR/inc_${fc}.txt"
 
-        # Download with timeout
-        if curl -s -L --max-time "$INCLUDE_TIMEOUT" --retry 1 -o "$include_file" "$include_url" 2>/dev/null; then
-            local inc_lines
+        # Download with timeout (--compressed: accept gzip/deflate, auto-decoded by curl)
+        if curl -s -L --compressed --max-time "$INCLUDE_TIMEOUT" --retry 1 \
+               -o "$include_file" "$include_url" 2>/dev/null; then
+            local inc_lines inc_size
             inc_lines=$(wc -l < "$include_file" | tr -d ' ')
-            if [ "$inc_lines" -gt 1 ]; then
-                if ! head -5 "$include_file" | grep -qi '<!doctype\|<html'; then
+            inc_size=$(wc -c < "$include_file" | tr -d ' ')
+            # Apply same quality gates as main validation: size + line count + HTML check
+            if [ "$inc_lines" -gt 1 ] && [ "$inc_size" -gt 200 ]; then
+                if ! head -10 "$include_file" | grep -qi '<!doctype\|<html\|HTTP Status\|<title>'; then
                     echo "      [+] $inc_lines lines — ${include_path:0:60}"
                     # Recursively resolve includes in this file too
                     resolve_includes "$include_file" "$include_url" $((depth + 1))
                 else
+                    echo "      [-] HTML/error response — ${include_path:0:60}"
                     rm -f "$include_file"
                 fi
             else
@@ -166,7 +185,7 @@ while IFS= read -r url; do
     total=$((total + 1))
     filename="$TEMP_DIR/list_${total}.txt"
 
-    if curl -s -L --max-time "$DOWNLOAD_TIMEOUT" --retry 1 --retry-delay 3 -o "$filename" "$url" 2>/dev/null; then
+    if curl -s -L --compressed --max-time "$DOWNLOAD_TIMEOUT" --retry 1 --retry-delay 3 -o "$filename" "$url" 2>/dev/null; then
         if validate_filter_list "$filename" "$url"; then
             lines=$(wc -l < "$filename" | tr -d ' ')
             echo "   [OK] $lines lines — ${url:0:80}"
