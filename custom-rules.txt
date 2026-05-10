@@ -153,9 +153,9 @@ animepahe.*,kwik.*,gogoanime.*,gogoanimes.*,9anime.*##+js(aopr, PopAds)
 
 !   Filters for browsing Reddit NSFW subreddits
 reddit.com###blocking-modal:remove()
-reddit.com##+js(remove-attr, blurred|embed-obscured, shreddit-blurred-container[reason="nsfw"], stay)
+reddit.com##shreddit-blurred-container[reason="nsfw"]:remove-attr(blurred|embed-obscured)
 reddit.com##+js(trusted-suppress-native-method, CustomElementRegistry.prototype.define, '"xpromo-nsfw-blocking-container"', prevent)
-reddit.com###right-sidebar-container [style*="filter: blur"]:style(filter: none !important;)
+reddit.com###right-sidebar-container[style*="filter: blur"]:style(filter: none !important;)
 reddit.com###right-sidebar-container svg[icon-name="nsfw-fill"]:style(display: none !important;)
 reddit.com###right-sidebar-container .bg-media-background:style(background: transparent !important; background-color: transparent !important;)
 reddit.com##a.viewInApp[slot="view-in-app-button"]
