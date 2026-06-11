@@ -59,18 +59,6 @@ https://filters.adtidy.org/extension/ublock/filters/15.txt
 https://big.oisd.nl
 https://someonewhocares.org/hosts/hosts
 
-# --- Regional ---
-https://filters.adtidy.org/extension/ublock/filters/224.txt
-https://filters.adtidy.org/extension/ublock/filters/1.txt
-https://filters.adtidy.org/extension/ublock/filters/7.txt
-https://easylist-downloads.adblockplus.org/easylistchina.txt
-https://raw.githubusercontent.com/easylist/ruadlist/master/RuAdList-uBO.txt
-https://easylist-downloads.adblockplus.org/easylistgermany.txt
-https://fanboy.co.nz/fanboy-korean.txt
-https://raw.githubusercontent.com/realodix/AdBlockID/main/dist/adblockid.adfl.txt
-https://easylist-downloads.adblockplus.org/indianlist.txt
-https://easylist-downloads.adblockplus.org/Liste_AR.txt
-
 # --- Dark Web, Scams & Proxy Bypass ---
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/doh-vpn-proxy-bypass.txt
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/fake.txt
