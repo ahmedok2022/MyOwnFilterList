@@ -7,7 +7,7 @@ Comprehensive ad, tracker, malware, phishing & annoyance filter list — auto-co
 Add this **one URL** to your browser:
 
 ```
-https://raw.githubusercontent.com/SamirPaulb/filter-lists/refs/heads/main/filters.txt
+https://raw.githubusercontent.com/ahmedok2022/MyOwnFilterList/refs/heads/main/filters.txt
 ```
 
 ### uBlock Origin (Desktop)
@@ -22,7 +22,7 @@ uBlock Origin silently disables `trusted-*` scriptlets (the YouTube ad bypass me
 2. Find `trustedListPrefixes` (default value: `ublock-`)
 3. Change it to:
    ```
-   ublock- https://raw.githubusercontent.com/SamirPaulb/
+   ublock- https://raw.githubusercontent.com/ahmedok2022/
    ```
 4. Save
 
@@ -35,22 +35,6 @@ This tells uBlock Origin to trust this list, enabling the `trusted-replace-fetch
 ### AdGuard
 1. Preferences → Filters → Custom → Add custom filter → paste the URL above
 2. No extra steps needed.
-
-## What's Included
-
-| Category | Sources |
-|----------|---------|
-| Ad Blocking | EasyList, uBlock Origin, AdGuard Base, Yoyo |
-| Privacy & Tracking | EasyPrivacy, AdGuard Tracking, uBO Privacy, yokoffing |
-| Malware & Phishing | URLhaus, Phishing Filter, Spam404, Hagezi TIF |
-| Annoyances | Fanboy Annoyance/Newsletter/Social, uBO Cookies, AdGuard Annoyances, yokoffing |
-| AI & Chat Widgets | Fanboy AI Suggestions, Fanboy Chat Apps |
-| Crypto Mining | NoCoin, uBO Resource Abuse |
-| Regional | Chinese, Russian, German, Korean, Indonesian, Indian, Arabic |
-| Security | Hagezi Fake, DoH/VPN/Proxy Bypass, IP Loggers, DandelionSprout Anti-Malware |
-| Brave-Specific | Brave Unbreak, Firstparty, Cookie, Social, YT Shorts |
-| Paywall Bypass | Antipaywall, BPC Paywall Filter |
-| Custom | Popup networks, streaming scriptlets, fingerprinting, notification spam |
 
 ## How It Works
 
