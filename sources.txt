@@ -12,3 +12,15 @@ https://secure.fanboy.co.nz/fanboy-annoyance.txt
 https://easylist.to/easylist/fanboy-social.txt
 https://filters.adtidy.org/extension/ublock/filters/2_without_easylist.txt
 https://ublockorigin.github.io/uAssetsCDN/filters/privacy-removeparam.txt
+https://malware-filter.gitlab.io/urlhaus-filter/urlhaus-filter-ag-online.txt
+https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=1&mimetype=plaintext
+https://github.com/yokoffing/filterlists/blob/main/click2load.txt
+https://github.com/hagezi/dns-blocklists/blob/main/adblock/pro.mini.txt
+https://github.com/DandelionSprout/adfilt/tree/master/ClearURLs%20for%20uBo
+https://github.com/yokoffing/filterlists/blob/main/annoyance_list.txt
+https://github.com/DandelionSprout/adfilt/blob/master/BrowseWebsitesWithoutLoggingIn.txt
+https://github.com/yokoffing/filterlists/blob/main/youtube_clear_view.txt
+https://gitflic.ru/project/magnolia1234/bypass-paywalls-clean-filters/blob/?file=bpc-paywall-filter.txt&branch=main
+https://github.com/liamengland1/miscfilters/blob/master/antipaywall.txt
+https://github.com/hagezi/dns-blocklists/blob/main/adblock/spam-tlds-ublock.txt
+https://github.com/hagezi/dns-blocklists?tab=readme-ov-file#new-newly-registered-domains-nrddga-
