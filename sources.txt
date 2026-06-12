@@ -50,4 +50,4 @@ https://raw.githubusercontent.com/easylist/easylist/refs/heads/master/fanboy-add
 https://raw.githubusercontent.com/easylist/easylist/master/fanboy-addon/fanboy_chatapps_third-party.txt
 https://raw.githubusercontent.com/liamengland1/miscfilters/master/antipaywall.txt
 https://gitflic.ru/project/magnolia1234/bypass-paywalls-clean-filters/blob/raw?file=bpc-paywall-filter.txt
-
+https://raw.githubusercontent.com/gijsdev/ublock-hide-yt-shorts/master/list.txt
