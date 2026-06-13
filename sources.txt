@@ -57,5 +57,4 @@ https://github.com/rimon3134/Filters/raw/refs/heads/main/ZeroAds.txt
 https://github.com/rimon3134/Filters/raw/refs/heads/main/ZeroHosts.txt
 https://github.com/rimon3134/Filters/raw/refs/heads/main/ZeroLock.txt
 https://github.com/rimon3134/Filters/raw/refs/heads/main/ZeroVoid.txt
-https://github.com/BevizLaszlo/UBlock-Filters-for-Social-Media/raw/refs/heads/main/filterlist.txt
 https://raw.githubusercontent.com/DandelionSprout/adfilt/master/LegitimateURLShortener.txt
