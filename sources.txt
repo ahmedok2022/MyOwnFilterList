@@ -67,7 +67,7 @@ https://raw.githubusercontent.com/gijsdev/ublock-hide-yt-shorts/master/list.txt
 https://raw.githubusercontent.com/easylist/easylist/refs/heads/master/fanboy-addon/fanboy_ai_suggestions.txt
 https://github.com/Suurp/uBlock-CustomFilters/blob/main/filters-faucets.txt
 https://github.com/Suurp/uBlock-CustomFilters/blob/main/filters-shortlinks.txt
-https://github.com/rimon3134/Filters/blob/main/ZeroAds.txt
-https://github.com/rimon3134/Filters/blob/main/ZeroHosts.txt
-https://github.com/rimon3134/Filters/blob/main/ZeroLock.txt
-https://github.com/rimon3134/Filters/blob/main/ZeroVoid.txt
+https://github.com/rimon3134/Filters/raw/refs/heads/main/ZeroAds.txt
+https://github.com/rimon3134/Filters/raw/refs/heads/main/ZeroHosts.txt
+https://github.com/rimon3134/Filters/raw/refs/heads/main/ZeroLock.txt
+https://github.com/rimon3134/Filters/raw/refs/heads/main/ZeroVoid.txt
