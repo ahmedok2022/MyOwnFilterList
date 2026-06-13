@@ -10,7 +10,6 @@ https://raw.githubusercontent.com/LanikSJ/ubo-filters/main/filters/combined-filt
 https://gurud.ee/ab.txt
 https://raw.githubusercontent.com/gasull/adblock-nsa/master/filters.txt
 https://easylist-downloads.adblockplus.org/antiadblockfilters.txt
-https://cdn.jsdelivr.net/gh/realodix/AdBlockID@latest/dist/adblockid.adfl.txt
 https://cdn.jsdelivr.net/gh/realodix/AdBlockID@latest/dist/adblockid_plus.adfl.txt
 https://filters.adtidy.org/extension/ublock/filters/14_optimized.txt
 https://filters.adtidy.org/extension/ublock/filters/2_optimized.txt
@@ -34,7 +33,6 @@ https://gitflic.ru/project/magnolia1234/bypass-paywalls-clean-filters/blob/raw?f
 https://raw.githubusercontent.com/DandelionSprout/adfilt/master/ClearURLs%20for%20uBo/clear_urls_uboified.txt
 https://raw.githubusercontent.com/bongochong/CombinedPrivacyBlockLists/master/cpbl-abp-list.txt
 https://raw.githubusercontent.com/dagoll/filters-list/master/dagoll-filters-list.txt
-https://raw.githubusercontent.com/DandelionSprout/adfilt/master/AdGuard%20Home%20Compilation%20List/AdGuardHomeCompilationList.txt
 https://raw.githubusercontent.com/Kees1958/W3C_annual_most_used_survey_blocklist/refs/heads/master/EU_US_MV3_most_common_ad%2Btracking_networks.txt
 https://easylist-downloads.adblockplus.org/fanboy-notifications.txt
 https://hostfiles.frogeye.fr/firstparty-only-trackers-hosts.txt
@@ -67,3 +65,9 @@ https://raw.githubusercontent.com/gioxx/xfiles/master/upd.txt
 https://raw.githubusercontent.com/yous/YousList/master/youslist.txt
 https://raw.githubusercontent.com/gijsdev/ublock-hide-yt-shorts/master/list.txt
 https://raw.githubusercontent.com/easylist/easylist/refs/heads/master/fanboy-addon/fanboy_ai_suggestions.txt
+https://github.com/Suurp/uBlock-CustomFilters/blob/main/filters-faucets.txt
+https://github.com/Suurp/uBlock-CustomFilters/blob/main/filters-shortlinks.txt
+https://github.com/rimon3134/Filters/blob/main/ZeroAds.txt
+https://github.com/rimon3134/Filters/blob/main/ZeroHosts.txt
+https://github.com/rimon3134/Filters/blob/main/ZeroLock.txt
+https://github.com/rimon3134/Filters/blob/main/ZeroVoid.txt
