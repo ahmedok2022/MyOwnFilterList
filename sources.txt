@@ -63,3 +63,8 @@ https://raw.githubusercontent.com/uniartisan/adblock_list/master/adblock_privacy
 https://raw.githubusercontent.com/yourduskquibbles/webannoyances/master/ultralist.txt
 https://raw.githubusercontent.com/yourduskquibbles/webannoyances/master/filters/ad_placeholders.txt
 https://raw.githubusercontent.com/yourduskquibbles/webannoyances/master/filters/cookie_filters.txt
+https://raw.githubusercontent.com/yourduskquibbles/webannoyances/master/filters/css_style_filters.txt
+https://raw.githubusercontent.com/yourduskquibbles/webannoyances/master/filters/floating_filters.txt
+https://raw.githubusercontent.com/yourduskquibbles/webannoyances/master/filters/generic_filters.txt
+https://raw.githubusercontent.com/yourduskquibbles/webannoyances/master/filters/modal_filters.txt
+https://raw.githubusercontent.com/yourduskquibbles/webannoyances/master/filters/newsletter_filters.txt
