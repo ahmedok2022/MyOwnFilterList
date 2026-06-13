@@ -68,3 +68,7 @@ https://raw.githubusercontent.com/yourduskquibbles/webannoyances/master/filters/
 https://raw.githubusercontent.com/yourduskquibbles/webannoyances/master/filters/generic_filters.txt
 https://raw.githubusercontent.com/yourduskquibbles/webannoyances/master/filters/modal_filters.txt
 https://raw.githubusercontent.com/yourduskquibbles/webannoyances/master/filters/newsletter_filters.txt
+https://raw.githubusercontent.com/yourduskquibbles/webannoyances/master/filters/social_filters.txt
+https://raw.githubusercontent.com/gioxx/xfiles/master/siteblock.txt
+https://raw.githubusercontent.com/gioxx/xfiles/master/facebook.txt
+https://raw.githubusercontent.com/gioxx/xfiles/master/upd.txt
