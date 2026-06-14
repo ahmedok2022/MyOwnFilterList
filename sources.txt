@@ -58,3 +58,4 @@ https://github.com/rimon3134/Filters/raw/refs/heads/main/ZeroHosts.txt
 https://github.com/rimon3134/Filters/raw/refs/heads/main/ZeroLock.txt
 https://github.com/rimon3134/Filters/raw/refs/heads/main/ZeroVoid.txt
 https://raw.githubusercontent.com/DandelionSprout/adfilt/master/LegitimateURLShortener.txt
+https://raw.githubusercontent.com/J3ekir/custom-filter-list/refs/heads/main/filters.txt
